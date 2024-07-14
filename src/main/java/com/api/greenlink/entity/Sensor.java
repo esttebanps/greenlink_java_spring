@@ -2,10 +2,9 @@ package com.api.greenlink.entity;
 
 import com.api.greenlink.entity.enums.TypeSensor;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -19,12 +18,15 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sensor_id;
 
+    @NotBlank(message = "name es obligatorio")
     @Column(length = 50)
     private String name_sensor;
 
+    //@NotBlank(message = "type es obligatorio")
     @Enumerated(EnumType.STRING)
     private TypeSensor sensor_type;
 
+    @NotBlank(message = "model es obligatorio")
     @Column(length = 50)
     private String model_sensor;
 
