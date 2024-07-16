@@ -16,7 +16,7 @@ public class Sensor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sensor_id;
+    private Long id;
 
     @NotBlank(message = "name es obligatorio")
     @Column(length = 50)

@@ -88,4 +88,23 @@ public class SensorService {
 
         return response;
     }
+
+    public SensorResponse deleteSensor(Long id) {
+        Optional<Sensor> sensor = sensorRepository.findById(id);
+
+        if (sensor.isPresent()){
+            SensorResponse response = new SensorResponse();
+            response.setName(sensor.get().getName_sensor());
+            response.setType(String.valueOf(sensor.get().getSensor_type()));
+            response.setModel(sensor.get().getModel_sensor());
+            response.setCreated_at(sensor.get().getCreated_at());
+
+            sensorRepository.deleteById(id);
+
+            return response;
+        }
+
+        throw new NotFoundException();
+
+    }
 }

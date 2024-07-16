@@ -5,6 +5,7 @@ import com.api.greenlink.dto.SensorResponse;
 import com.api.greenlink.entity.Sensor;
 import com.api.greenlink.service.SensorService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class SensorController {
     @PostMapping("/sensors")
     public ResponseEntity<Sensor> postSensor(@RequestBody SensorInput sensorInput) {
         Sensor newSensor = sensorService.addSensor(sensorInput);
-        return ResponseEntity.ok(newSensor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newSensor);
     }
 
     @GetMapping("/sensors")
@@ -36,6 +37,12 @@ public class SensorController {
 
     @PutMapping("/sensors/{id}")
     public ResponseEntity<SensorResponse> updateSensor(@PathVariable Long id, @RequestBody SensorInput sensorInput) {
-        return ResponseEntity.ok(sensorService.updateSensor(id, sensorInput));
+        return ResponseEntity.status(HttpStatus.CREATED).body(sensorService.updateSensor(id, sensorInput));
+    }
+
+    @DeleteMapping("/sensors/{id}")
+    public ResponseEntity<SensorResponse> deleteSensor(@PathVariable Long id) {
+        sensorService.deleteSensor(id);
+        return ResponseEntity.noContent().build();
     }
 }
