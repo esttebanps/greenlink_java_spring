@@ -20,8 +20,8 @@ public class SensorController {
     private final SensorService sensorService;
 
     @PostMapping("/sensors")
-    public ResponseEntity<Sensor> postSensor(@RequestBody SensorInput sensorInput) {
-        Sensor newSensor = sensorService.addSensor(sensorInput);
+    public ResponseEntity<SensorResponse> postSensor(@RequestBody SensorInput sensorInput) {
+        SensorResponse newSensor = sensorService.addSensor(sensorInput);
         return ResponseEntity.status(HttpStatus.CREATED).body(newSensor);
     }
 

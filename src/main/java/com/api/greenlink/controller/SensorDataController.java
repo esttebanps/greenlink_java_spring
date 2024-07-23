@@ -19,7 +19,7 @@ public class SensorDataController {
     private final SensorDataService registrationService;
 
     @PostMapping("/sensors/{id}/data")
-    public ResponseEntity<SensorData> addSensorRegistration(@RequestBody DataInput dataInput, @PathVariable Long id){
+    public ResponseEntity<DataResponse> addSensorRegistration(@RequestBody DataInput dataInput, @PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(registrationService.addSensorRegistration(dataInput, id));
     }
 

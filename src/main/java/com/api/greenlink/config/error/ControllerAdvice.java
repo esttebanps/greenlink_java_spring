@@ -94,5 +94,24 @@ public class ControllerAdvice {
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(
+            InvalidCredentialsException e,
+            HttpServletRequest request
+    ) {
+        String message = "Credenciales inválidas";
+
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.name(),
+                e.getMessage()==null ? message : e.getMessage(),
+                LocalDateTime.now(),
+                request.getRequestURI()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
 }
 

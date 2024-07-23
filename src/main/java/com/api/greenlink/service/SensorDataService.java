@@ -7,12 +7,15 @@ import com.api.greenlink.entity.Sensor;
 import com.api.greenlink.entity.SensorData;
 import com.api.greenlink.repository.SensorDataRepository;
 import com.api.greenlink.repository.SensorRepository;
+import com.api.greenlink.util.SensorDataMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.api.greenlink.util.SensorDataMapper.toDataResponse;
 
 @Service
 @AllArgsConstructor
@@ -21,35 +24,29 @@ public class SensorDataService {
     private final SensorRepository sensorRepository;
     private final SensorDataRepository dataRepository;
 
-    public SensorData addSensorRegistration(DataInput dataInput, Long id) {
-
+    public DataResponse addSensorRegistration(DataInput dataInput, Long id) {
         Optional<Sensor> sensor = sensorRepository.findById(id);
         if (sensor.isPresent()) {
-            SensorData registration = new SensorData();
-            registration.setValue(dataInput.getValue());
-            registration.setSensor(sensor.get());
-            return dataRepository.save(registration);
+            SensorData sensorData = new SensorData();
+            sensorData.setValue(dataInput.getValue());
+            sensorData.setSensor(sensor.get());
+            dataRepository.save(sensorData);
+            return toDataResponse(sensorData);
         }
-
         throw new NotFoundException("Sensor no encontrado");
     }
 
     public List<DataResponse> getRegistrationsById(Long id) {
-        List<SensorData> registrations = dataRepository.findAllBySensorId(id);
-        List<DataResponse> responses = new ArrayList<>();
+        List<DataResponse> registrations = dataRepository
+                .findAllBySensorId(id)
+                .stream()
+                .map(SensorDataMapper::toDataResponse)
+                .toList();
 
-        if (!registrations.isEmpty()) {
-            for (SensorData sensorData : registrations) {
-                DataResponse response = new DataResponse();
-                response.setValue(sensorData.getValue());
-                response.setCreated_at(sensorData.getCreated_at());
-                response.setSensor_name(sensorData.getSensor().getName_sensor());
-                response.setSensor_type(String.valueOf(sensorData.getSensor().getSensor_type()));
-                responses.add(response);
-            }
-            return responses;
+        if (registrations.isEmpty()) {
+            throw new NotFoundException("No hay datos registrados para este sensor");
         }
 
-        throw new NotFoundException("No hay datos registrados para este sensor");
+        return registrations;
     }
 }
