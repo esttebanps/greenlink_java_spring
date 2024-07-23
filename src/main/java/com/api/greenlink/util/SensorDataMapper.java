@@ -1,8 +1,6 @@
 package com.api.greenlink.util;
 
-import com.api.greenlink.dto.DataInput;
-import com.api.greenlink.dto.DataResponse;
-import com.api.greenlink.dto.SensorInput;
+import com.api.greenlink.dto.data.DataResponse;
 import com.api.greenlink.entity.SensorData;
 import org.springframework.stereotype.Component;
 

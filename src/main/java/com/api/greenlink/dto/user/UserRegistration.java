@@ -1,4 +1,4 @@
-package com.api.greenlink.dto;
+package com.api.greenlink.dto.user;
 
 import com.api.greenlink.entity.enums.Role;
 import lombok.AllArgsConstructor;

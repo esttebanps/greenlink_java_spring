@@ -1,12 +1,10 @@
 package com.api.greenlink.util;
 
-import com.api.greenlink.dto.SensorInput;
-import com.api.greenlink.dto.SensorResponse;
+import com.api.greenlink.dto.sensor.SensorInput;
+import com.api.greenlink.dto.sensor.SensorResponse;
 import com.api.greenlink.entity.Sensor;
 import com.api.greenlink.entity.enums.TypeSensor;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Component
 public class SensorMapper {

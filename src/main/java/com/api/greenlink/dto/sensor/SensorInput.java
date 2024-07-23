@@ -1,4 +1,4 @@
-package com.api.greenlink.dto;
+package com.api.greenlink.dto.sensor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

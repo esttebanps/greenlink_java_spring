@@ -1,8 +1,7 @@
 package com.api.greenlink.util;
 
-import com.api.greenlink.dto.LoginResponse;
-import com.api.greenlink.dto.UserRegistration;
-import com.api.greenlink.dto.UserResponse;
+import com.api.greenlink.dto.user.LoginResponse;
+import com.api.greenlink.dto.user.UserResponse;
 import com.api.greenlink.entity.UserGreenlink;
 import org.springframework.stereotype.Component;
 

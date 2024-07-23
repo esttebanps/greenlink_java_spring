@@ -1,8 +1,8 @@
 package com.api.greenlink.service;
 
 import com.api.greenlink.config.error.NotFoundException;
-import com.api.greenlink.dto.DataInput;
-import com.api.greenlink.dto.DataResponse;
+import com.api.greenlink.dto.data.DataInput;
+import com.api.greenlink.dto.data.DataResponse;
 import com.api.greenlink.entity.Sensor;
 import com.api.greenlink.entity.SensorData;
 import com.api.greenlink.repository.SensorDataRepository;
@@ -11,7 +11,6 @@ import com.api.greenlink.util.SensorDataMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

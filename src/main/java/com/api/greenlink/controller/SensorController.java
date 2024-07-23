@@ -1,13 +1,11 @@
 package com.api.greenlink.controller;
 
-import com.api.greenlink.dto.SensorInput;
-import com.api.greenlink.dto.SensorResponse;
-import com.api.greenlink.entity.Sensor;
+import com.api.greenlink.dto.sensor.SensorInput;
+import com.api.greenlink.dto.sensor.SensorResponse;
 import com.api.greenlink.service.SensorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

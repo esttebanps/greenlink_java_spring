@@ -1,10 +1,9 @@
 package com.api.greenlink.controller;
 
-import com.api.greenlink.dto.Login;
-import com.api.greenlink.dto.LoginResponse;
-import com.api.greenlink.dto.UserRegistration;
-import com.api.greenlink.dto.UserResponse;
-import com.api.greenlink.entity.UserGreenlink;
+import com.api.greenlink.dto.user.Login;
+import com.api.greenlink.dto.user.LoginResponse;
+import com.api.greenlink.dto.user.UserRegistration;
+import com.api.greenlink.dto.user.UserResponse;
 import com.api.greenlink.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;

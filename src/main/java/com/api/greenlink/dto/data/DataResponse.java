@@ -1,4 +1,4 @@
-package com.api.greenlink.dto;
+package com.api.greenlink.dto.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserResponse {
-    private String username;
-    private String email;
+public class DataResponse {
+    private String value;
     private LocalDateTime created_at;
+    private String sensor_name;
+    private String sensor_type;
 }
