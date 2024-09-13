@@ -2,7 +2,7 @@ package com.api.greenlink.auth.service.impl;
 
 import com.api.greenlink.auth.service.SecretKeyConverter;
 import com.api.greenlink.auth.service.TokenGenerator;
-import com.esttebanps.JwtUtil;
+import com.api.greenlink.util.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

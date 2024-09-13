@@ -96,11 +96,6 @@
 			<version>0.12.6</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.esttebanps</groupId>
-			<artifactId>jjwt-util</artifactId>
-			<version>1.0.0</version>
-		</dependency>
 
 	</dependencies>
 
@@ -120,12 +115,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>github</id>
-			<url>https://maven.pkg.github.com/esttebanps/jjwt_util</url>
-		</repository>
-	</repositories>
+
 
 
 </project>

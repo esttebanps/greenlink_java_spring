@@ -6,7 +6,7 @@ import com.api.greenlink.auth.service.SecretKeyConverter;
 import com.api.greenlink.flowerpot.entity.Flowerpot;
 import com.api.greenlink.flowerpot.repository.FlowerpotRepository;
 import com.api.greenlink.user.entity.UserGreenlink;
-import com.esttebanps.JwtUtil;
+import com.api.greenlink.util.JwtUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authorization.AuthorizationDecision;
