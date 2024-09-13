@@ -12,7 +12,7 @@ public class UserMapper {
         UserResponse userResponse = new UserResponse();
         userResponse.setUsername(user.getUsername());
         userResponse.setEmail(user.getEmail());
-        userResponse.setCreated_at(user.getCreated_at());
+        userResponse.setCreatedDate(user.getCreateDate());
         return userResponse;
     }
 }

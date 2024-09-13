@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: greenlink-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: JDBC_DATABASE_URL
+        fromDatabase:
+          name: greenlink-db
+          property: connectionString
+      - key: JDBC_DATABASE_USERNAME
+        fromDatabase:
+          name: greenlink-db
+          property: user
+      - key: JDBC_DATABASE_PASSWORD
+        fromDatabase:
+          name: greenlink-db
+          property: password
+
+databases:
+  - name: greenlink-db
+    databaseName: db_desarrollo
+    user: admin

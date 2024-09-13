@@ -1,6 +1,8 @@
 package com.api.greenlink.user.entity;
 
+import com.api.greenlink.auditing.AbstractAuditingEntity;
 import com.api.greenlink.auth.enums.Role;
+import com.api.greenlink.flowerpot.entity.Flowerpot;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -12,33 +14,33 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data @Builder
-public class UserGreenlink implements UserDetails {
+public class UserGreenlink extends AbstractAuditingEntity implements UserDetails {
     @Getter
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Es oblicatorio este campo")
+    @NotBlank(message = "Es obligatorio este campo")
     @Column(unique = true)
     private String username;
-    @NotBlank(message = "Es oblicatorio este campo")
+
+    @NotBlank(message = "Es obligatorio este campo")
     @Column(unique = true)
     private String email;
+
+    @NotBlank(message = "Es obligatorio este campo")
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Flowerpot> flowerpots;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Role> authorities;
-
-    @Builder.Default
-    @CreatedDate
-    private LocalDateTime created_at = LocalDateTime.now();;
-
-    @Builder.Default
-    private LocalDateTime last_password_change_at = LocalDateTime.now();
 
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
@@ -79,6 +81,13 @@ public class UserGreenlink implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "UserGreenlink{" +
+                "id=" + id +
+                '}';
     }
 
 }

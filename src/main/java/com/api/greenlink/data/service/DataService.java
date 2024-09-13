@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DataService {
-    DataResponse addSensorRegistration(DataInput dataInput, Long id);
-    Map<String, Object> getRegistrationsById(Long id, int page, int size);
+    DataResponse addDataFlowerpot(DataInput dataInput, Long id);
+    Map<String, Object> getDataById(Long id, int page, int size);
 
 }
