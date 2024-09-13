@@ -36,4 +36,5 @@ public class AuthServiceImpl implements AuthService {
         String token = tokenGenerator.createToken(username, roles);
         return toLoginResponse(token);
     }
+
 }

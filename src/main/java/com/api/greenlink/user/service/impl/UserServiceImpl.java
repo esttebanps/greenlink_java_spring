@@ -8,6 +8,7 @@ import com.api.greenlink.exceptions.exception.NotFoundException;
 import com.api.greenlink.exceptions.exception.BadRequestException;
 import com.api.greenlink.user.dto.UserRegistration;
 import com.api.greenlink.user.dto.UserResponse;
+import com.api.greenlink.user.dto.UserUpdate;
 import com.api.greenlink.user.entity.UserGreenlink;
 import com.api.greenlink.user.mapper.UserMapper;
 import com.api.greenlink.user.repository.UserRepository;
@@ -18,6 +19,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
+    @Override
     public UserResponse addUser(UserRegistration newUser) {
         validateUserInput(newUser);
         validateUniqueConstraints(newUser);
@@ -74,7 +79,7 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Invalid email");
         }
 
-        if (!passwordValidator.isValid(newUser.getPassword(), newUser.getConfirm_password())) {
+        if (!passwordValidator.isValid(newUser.getPassword(), newUser.getConfirmPassword())) {
             throw new BadRequestException("Password and confirmation do not match");
         }
     }
@@ -98,6 +103,7 @@ public class UserServiceImpl implements UserService {
         return userGreenlink;
     }
 
+    @Override
     public Map<String, Object> getUsers(int page, int size){
         PageRequest pageable = PageRequest.of(page, size);
         Page<UserResponse> users = userRepository
@@ -122,5 +128,41 @@ public class UserServiceImpl implements UserService {
 
         return toUserResponse(user.get());
 
+    }
+
+    @Override
+    public UserResponse updateUser(UserUpdate newUser, Long id) {
+        Optional<UserGreenlink> user = userRepository.findById(id);
+        Authentication authentication = SecurityContextHolder
+                .getContext().getAuthentication();
+
+        if (user.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
+
+        UserGreenlink updatedUser = user.get();
+        updatedUser.setUsername(newUser.getUsername());
+        updatedUser.setEmail(newUser.getEmail());
+
+        String credential = (String) authentication.getCredentials();
+        boolean passwordMatch = passwordEncode.matches(newUser.getCurrentPassword(), credential);
+
+        if (newUser.getCurrentPassword()!= null
+                && passwordMatch
+                && newUser.getNewPassword() != null
+                && newUser.getConfirmNewPassword() != null)
+        {
+            if (!passwordValidator.isValid(newUser.getNewPassword(), newUser.getConfirmNewPassword())) {
+                throw new BadRequestException("Password and confirmation do not match");
+            }
+            updatedUser.setPassword(passwordEncode.encode(newUser.getNewPassword()));
+        } else {
+            throw new BadRequestException("Invalid current password");
+        }
+
+
+        userRepository.save(updatedUser);
+
+        return toUserResponse(updatedUser);
     }
 }

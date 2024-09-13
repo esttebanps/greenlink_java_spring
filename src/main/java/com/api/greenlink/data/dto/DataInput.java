@@ -8,5 +8,8 @@ import lombok.Setter;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 public class DataInput {
-    private String value;
+    private String temperature;
+    private String humidity;
+    private String sun;
+
 }

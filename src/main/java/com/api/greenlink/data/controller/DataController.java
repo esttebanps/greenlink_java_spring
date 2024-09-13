@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,17 +17,18 @@ public class DataController {
 
     private final DataService registrationService;
 
-    @PostMapping("/sensors/{id}/data")
+    @PostMapping("/flowerpot/{id}/data")
     public ResponseEntity<DataResponse> addSensorRegistration(@RequestBody DataInput dataInput, @PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.CREATED).body(registrationService.addSensorRegistration(dataInput, id));
+        DataResponse response = registrationService.addDataFlowerpot(dataInput, id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/sensors/{id}/data")
+    @GetMapping("/flowerpot/{id}/data")
     public ResponseEntity<Map<String, Object>> getAllSensorRegistrations(
             @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size
     ){
-        return ResponseEntity.ok(registrationService.getRegistrationsById(id, page, size));
+        return ResponseEntity.ok(registrationService.getDataById(id, page, size));
     }
 }

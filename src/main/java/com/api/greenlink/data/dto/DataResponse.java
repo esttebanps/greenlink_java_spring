@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -12,8 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class DataResponse {
-    private String value;
-    private LocalDateTime created_at;
-    private String sensor_name;
-    private String sensor_type;
+    private String temperature;
+    private String humidity;
+    private String sun;
+    private Instant createDate;
 }

@@ -2,6 +2,7 @@ package com.api.greenlink.user.controller;
 
 import com.api.greenlink.user.dto.UserRegistration;
 import com.api.greenlink.user.dto.UserResponse;
+import com.api.greenlink.user.dto.UserUpdate;
 import com.api.greenlink.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -36,5 +37,11 @@ public class UserController {
     @GetMapping("/users/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id, Authentication authentication) {
         return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody UserUpdate userUpdate) {
+        UserResponse response = userService.updateUser(userUpdate, id);
+        return ResponseEntity.ok(response);
     }
 }

@@ -16,6 +16,6 @@ public class UserRegistration {
     private String username;
     private String email;
     private String password;
-    private String confirm_password;
+    private String confirmPassword;
     private List<Role> roles;
 }
