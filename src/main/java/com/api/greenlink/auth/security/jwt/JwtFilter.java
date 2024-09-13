@@ -17,8 +17,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import static com.esttebanps.JwtUtil.getUsernameFromToken;
-import static com.esttebanps.JwtUtil.isTokenValid;
+
+import static com.api.greenlink.util.JwtUtil.getUsernameFromToken;
+import static com.api.greenlink.util.JwtUtil.isTokenValid;
 
 
 @Configuration

@@ -3,7 +3,6 @@ FROM maven:3.8.4-openjdk-17-slim AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-COPY settings.xml /root/.m2/settings.xml
 RUN mvn clean package -DskipTests
 
 # Run stage
